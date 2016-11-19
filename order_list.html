@@ -1,0 +1,105 @@
+<?php
+	session_start();
+	$file_path = 'entity/order.json'; 
+	$jsondata = file_get_contents($file_path);
+	// decode json data
+	$orders = json_decode($jsondata, true);
+	$match = false;
+	$res = null;
+	$searchStr = "";
+	if(!empty($_GET["action"])) {
+	switch($_GET["action"]) {
+		case "search":
+			$match = false;
+			$searchStr = trim($_POST["orderNo"]);
+			if(array_key_exists($searchStr,$orders)) {				
+				$res = $orders[$searchStr];
+				$match = true;
+			}
+		break;		
+	}
+}	
+?>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>        
+	<link rel="icon" href="resources/images/sites/favicon.png" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+	<script type="text/javascript" src="resources/jquery/jquery.js"></script>
+	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+	<title>Order List</title>	
+</head>
+<body>
+<div class="container-fluid">
+	<!--header-->
+	<?php include("header.html") ?>
+	<!--end of header-->
+	<!--contents-->
+	<!--search area-->
+	<div class="table-responsive col-md-3" style="margin-right: 20px;">
+		<h3>SEARCH ORDER INFO</h3>
+		<hr/>
+		<form class="form" action="?action=search" method="post" id='searchForm'>
+			<div class="form-group">
+                    <label for="orderNo">Order Number</label>
+                    <input type="text"
+                           id="orderNo"
+                           name="orderNo"
+                           class="form-control"                                                      
+					/>                
+			</div>			
+			<input type="submit" value="Search" id="btnSearch" class="btn btn-default pull-right"/>
+		</form>
+	</div>
+	<!--end of search area-->
+	<!--result area-->
+	<?php if($match) { ?>
+	<div class="container table-responsive col-md-8">
+		<h2>Order No: <kbd><?php echo $searchStr; ?><kbd></h2>
+		<hr/>
+		<ul>
+			<li>
+				<h3>Customer Information</h3>
+				<ul>
+					<li>Customer Name: <?php echo $res['cusInfo']['cusName']; ?></li>
+					<li>Tel no.: <?php echo $res['cusInfo']['tel']; ?></li>
+					<li>Address: <?php echo $res['cusInfo']['address']; ?></li>
+					<li>Email: <?php echo $res['cusInfo']['email']; ?></li>					
+				</ul>
+			</li>
+			<li>
+				<h3>Items in Order</h3>
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th>ITEM</th>
+							<th>UNIT</th>
+							<th>PRICE</th>
+							<th>QUANTITY</th>
+						</tr>
+					</thead>
+					<tbody>
+				<?php
+					foreach($res['items'] as $k => $v){
+						echo '<tr>';
+						foreach($v as $k1 => $v1) {
+							if($k1 == 'code' || $k1 == 'image' || $k1 == 'desc') continue;
+							echo '<td>' . $v1 . '</td>';							
+						}
+						echo '</tr>';
+					}
+				?>
+					</tbody>
+				</table>				
+			</li>
+		</ul>		
+	</div>
+	<?php } ?>
+	<!--end of result area-->
+	<!--end of contents-->	
+</div>
+</body>
+</html>

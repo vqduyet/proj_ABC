@@ -1,0 +1,91 @@
+
+<?php
+	session_start();
+?>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>        
+	<link rel="icon" href="resources/images/sites/favicon.png" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+	<script type="text/javascript" src="resources/jquery/jquery.js"></script>
+	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+	<title>Order Confirmation</title>	
+</head>
+<body>
+<div class="container-fluid">
+	<!--header-->
+	<?php include("header.html") ?>
+	<!--end of header-->
+	<!--contents-->
+	<?php if(isset($_SESSION['order_status'])){
+		$info = $_SESSION['order_success'];
+		$key = session_id();
+	?>
+	<div class="container table-responsive col-md-8 col-md-offset-2">
+		<div class="text-center">
+		<h1 >YOUR ORDER HAS BEEN RECEIVED</h1>
+		<hr/>
+		<p class="lead">THANK YOU FOR YOUR PURCHASE!<br/>
+		Your order # is: <kbd><?php echo $key; ?></kbd>
+		</p>		
+		</div>
+		<p>You will receive an order confirmation email with details of your order, with the same info as follows:<p>
+		<ul>
+			<li>
+				<h3>Customer Information</h3>
+				<ul>
+					<li>Customer Name: <?php echo $info[$key]['cusInfo']['cusName']; ?></li>
+					<li>Tel no.: <?php echo $info[$key]['cusInfo']['tel']; ?></li>
+					<li>Address: <?php echo $info[$key]['cusInfo']['address']; ?></li>
+					<li>Email: <?php echo $info[$key]['cusInfo']['email']; ?></li>					
+				</ul>
+			</li>
+			<li>
+				<h3>Items in Order</h3>
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th>ITEM</th>
+							<th>UNIT</th>
+							<th>PRICE</th>
+							<th>QUANTITY</th>
+						</tr>
+					</thead>
+					<tbody>
+				<?php
+					foreach($info[$key]['items'] as $k => $v){
+						echo '<tr>';
+						foreach($v as $k1 => $v1) {
+							if($k1 == 'code' || $k1 == 'image' || $k1 == 'desc') continue;
+							echo '<td>' . $v1 . '</td>';							
+						}
+						echo '</tr>';
+					}
+				?>
+					</tbody>
+				</table>				
+			</li>
+		</ul>
+		<?php
+			//cancel session info and re-create a new one
+			session_unset();
+			session_destroy();
+			session_write_close();
+			setcookie(session_name(),'',0,'/');
+			session_regenerate_id(true);
+		?>
+		<div class="text-center">
+			<p>You can re-check your order info with above Order No. in <a href="order_list.html" class="btn btn-info btn-sm" role="button">Order List</a><p>
+			<a href="index.html" class="btn btn-default" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping</a>
+		</div>
+	</div>
+	<!--end of contents-->	
+	<?php } else {
+		header("Location: page404.html");
+	} ?>
+</div>
+</body>
+</html>

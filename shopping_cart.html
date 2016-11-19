@@ -1,0 +1,282 @@
+
+<?php
+session_start();
+if(!empty($_GET["action"])) {
+	switch($_GET["action"]) {
+		case "remove":
+			if(!empty($_SESSION["cart_item"])) {
+				foreach($_SESSION["cart_item"] as $k => $v) {
+						if($_GET["code"] == $k)
+							unset($_SESSION["cart_item"][$k]);				
+						if(empty($_SESSION["cart_item"]))
+							unset($_SESSION["cart_item"]);
+				}
+			}
+		break;
+		case "empty":
+			unset($_SESSION["cart_item"]);
+		break;
+		case "edit":
+			$total_price = 0;
+			$subtotal = 0;
+			foreach ($_SESSION['cart_item'] as $k => $v) {
+			  if($_POST["code"] == $k) {
+				  if($_POST["quantity"] == '0') {
+					  unset($_SESSION["cart_item"][$k]);
+				  } else {
+					$_SESSION['cart_item'][$k]["quantity"] = (integer)$_POST["quantity"];
+					$subtotal = (integer)$_POST["quantity"] * $_SESSION['cart_item'][$k]["price"];
+				  }
+			  }
+				$total_price += $_SESSION['cart_item'][$k]["price"] * $_SESSION['cart_item'][$k]["quantity"];	
+				 
+			}
+			if($total_price!=0 && is_numeric($total_price)) {
+				$response = array(
+					'totalprice' => number_format($total_price,2),
+					'subtotal' => number_format($subtotal,2)
+				);				
+				print json_encode($response);
+				exit;
+			}
+		break;
+	}
+}
+?>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>        
+	<link rel="icon" href="resources/images/sites/favicon.png" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+	<script type="text/javascript" src="resources/jquery/jquery.js"></script>
+	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+	<title>Shopping Cart</title>	
+</head>
+<body>
+<div class="container-fluid">
+	<!--header-->
+	<?php include("header.html") ?>
+	<!--end of header-->
+	<!--contents-->
+	<h1>Ur Cart</h1>
+	<div class="table-responsive col-md-8">
+		<table class="table table-condensed table-hover">
+		<thead>
+			<tr>
+				<th colspan="2">ITEM</th>
+				<th>UNIT</th>
+				<th>PRICE</th>
+				<th>QUANTITY</th>
+				<th>SUBTOTAL</th>
+				<th>ACTION</th>
+			</tr>
+		</thead>
+<?php
+$total_price = 0.00;
+if(isset($_SESSION["cart_item"])){
+?>		
+		<tbody>
+			<?php foreach ($_SESSION["cart_item"] as $item) { 
+				$subtotal = $item["price"] * $item["quantity"];
+				$total_price += $subtotal;
+				
+			?>
+			<tr>
+				<td><img class="img-responsive img-circle" style="width:60px; height:60px" src="<?php echo $item['image']; ?>"></td>
+				<td><h4><?php echo $item["name"]; ?></h4></td>
+				<td><?php echo $item["unit"]; ?></td>
+				<td><?php echo '$'.$item["price"]; ?></td>
+				<td><input class="input-sm" id="<?php echo 'qty-'.$item['code']; ?>" type="number" value="<?php echo $item['quantity']; ?>" name="modQty" min="1" disabled/></td>
+				<td>$<span id="<?php echo 'sub-'.$item['code']; ?>"><?php echo number_format($subtotal,2); ?><span></td>
+				<td>	
+					<div class="btn-group">
+						<button class="btn btn-default btnEdit btn-md" data-button="<?php echo $item['code']; ?>" data-id="<?php echo 'btnEdit-'.$item['code']; ?>"  title="Edit"><span class="glyphicon glyphicon-edit"></span></button>
+						<button class="btn btn-success btn-md btnUpdate btn-hide" data-button="<?php echo $item['code']; ?>" data-id="<?php echo 'btnUpdate-'.$item['code']; ?>" title="Update"><span class="glyphicon glyphicon-check"></span></button>
+						<a href="shopping_cart.html?action=remove&code=<?php echo $item['code']; ?>" class="btn btn-warning btn-md" role="button" title="Remove"><span class="glyphicon glyphicon-trash"></span></a>
+					</div>
+					
+				</td>
+			</tr>	
+			<?php } ?>
+		</tbody>		
+		</table>
+		<div class="pull-right">
+		<hr/>
+		<h3>Total Amount: $<span id="total_price"><?php echo number_format($total_price,2); ?></span></h3>
+		<a href="index.html" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping</a>
+		<a href="shopping_cart.html?action=empty" class="btn btn-warning btn-sm" role="button">Clear Cart</a>		
+		</div>
+	</div>
+	
+	<!--client's info-->
+	<div class="table-responsive col-md-3" style="margin-left: 20px;">
+		<h3>CUSTOMER'S INFO</h3>
+		<hr/>
+		<form class="form" action="order_controller.html" method="post" id='orderForm'>
+			<div class="form-group">
+                    <label for="cusName">Customer Name</label>
+                    <input type="text"
+                           id="cusName"
+                           name="cusName"
+                           class="form-control"
+                           required="true"                           
+					/>                
+			</div>
+			<div class="form-group">
+                    <label for="cusTel">Phone No.</label>
+                    <input type="tel"
+						   pattern="[0-9]{10,12}"
+                           id="cusTel"
+                           name="cusTel"
+                           class="form-control"
+                           required="true"                           
+					/>                
+			</div>
+			<div class="form-group">
+                    <label for="cusAddr">Address</label>
+                    <input type="text"
+                           id="cusAddr"
+                           name="cusAddr"
+                           class="form-control"
+                           required="true"                           
+					/>                
+			</div>
+			<div class="form-group">
+                    <label for="cusEmail">Email</label>
+                    <input type="email"
+                           id="cusEmail"
+                           name="cusEmail"
+                           class="form-control"
+						   required="true"						   
+					/>                
+			</div>
+			<input type="submit" value="Order" id="btnOrder" class="btn btn-success pull-right"/>
+		</form>
+	</div>
+	<!--end of client's info-->
+	
+<?php } else { ?>
+	<tbody>
+		<tr>
+			<td><span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Your cart is empty!</td>
+		</tr>
+	</tbody>
+	</table>
+	<div class="pull-right">
+		<hr/>
+		<a href="index.html" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping</a>
+		</div>
+<?php } ?>	
+	<!--end of contents-->
+</div>
+<script>
+$(document).ready(function() {
+	/*submit order form*/
+	$("#btnOrder").click(function(e) {
+		if(!validateOrderForm()){
+			e.preventDefault();			
+		}
+		else {
+			$("#orderForm").submit();
+		}
+	});
+	/*validate order form*/
+	function validateOrderForm(){
+		var errCount = 0;	
+		var nameReg = /^[a-zA-Z][a-zA-Z ]+$/;
+		var numberReg =  /^[0-9]{10,12}$/;
+		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+		var names = $('#cusName').val();
+		var telephone = $('#cusTel').val();
+		var email = $('#cusEmail').val();
+		var addr = $('#cusAddr').val();    
+
+		var inputVal = new Array(names, telephone, email, addr);
+
+		var inputMessage = new Array("name", "telephone number", "email address", "address");
+
+		$('.error').hide();
+
+		if(inputVal[0] == ""){
+			$('#cusName').after('<div class="error alert-danger"> Please enter your ' + inputMessage[0] + '</div>');
+			errCount++;
+		} 
+		else if(!nameReg.test(names)){
+			$('#cusName').after('<div class="error alert-danger"> Letters only</div>');
+			errCount++;
+		}
+		
+		if(inputVal[1] == ""){
+			$('#cusTel').after('<div class="error alert-danger"> Please enter your ' + inputMessage[1] + '</div>');
+			errCount++;
+		} 
+		else if(!numberReg.test(telephone)){
+			$('#cusTel').after('<div class="error alert-danger"> Tel no. consists 10-12 digits</div>');
+			errCount++;
+		}
+
+		if(inputVal[2] == ""){
+			$('#cusEmail').after('<div class="error alert-danger"> Please enter your ' + inputMessage[2] + '</div>');
+			errCount++;
+		} 
+		else if(!emailReg.test(email)){
+			$('#cusEmail').after('<div class="error alert-danger"> Please enter a valid email address</div>');
+			errCount++;
+		}
+		
+		if(inputVal[3] == ""){
+			$('#cusAddr').after('<div class="error alert-danger"> Please enter your ' + inputMessage[3] + '</div>');
+			errCount++;
+		}
+		
+		if(errCount==0) return true;
+		else return false;		
+	}
+	/*toggle Edit button*/
+	$('.btnEdit').click(function(){
+		var $button = $(this);
+		var buttonNumber = $button.data('button');
+
+		$button.addClass('btn-hide');
+		$('#qty-'+buttonNumber).prop("disabled", false );
+		$('.btnUpdate[data-button="'+buttonNumber+'"]').removeClass('btn-hide');
+		});
+	/*toggle Update button and submit ajax*/
+	$('.btnUpdate').click(function(e){
+		var $button = $(this);
+		var buttonNumber = $button.data('button');
+		var quantity = $('#qty-'+buttonNumber).val();
+		if(quantity == "" || !(Math.floor(quantity) == quantity && $.isNumeric(quantity)) || quantity <= 0 ) {
+			alert('Quantity must be positive integer number!\nPlease re-enter.');
+			e.preventDefault();
+		}
+		else {
+			$button.addClass('btn-hide');
+			$('#qty-'+buttonNumber).prop("disabled", true );			
+			$('.btnEdit[data-button="'+buttonNumber+'"]').removeClass('btn-hide');
+			
+			$.ajax({
+				url: "?action=edit",
+				type: "POST",
+				dataType : 'json',
+				data : {
+					code : buttonNumber,
+					quantity : quantity
+				},				
+				success: function(data, status){
+					$("#total_price").html(data.totalprice);
+					$('#sub-'+buttonNumber).html(data.subtotal);
+				},
+				error: function() {alert("Problem in sending reply!")}
+			});
+		}
+	});
+});
+</script>
+
+</body>
+</html>

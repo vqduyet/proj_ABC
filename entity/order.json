@@ -1,0 +1,169 @@
+{
+    "85i7es42r0qec6fr8sa0sfdra0": {
+        "items": {
+            "C001": {
+                "code": "C001",
+                "name": "Thanksgiving Blend",
+                "unit": "1lb",
+                "price": 14.95,
+                "image": "resources\/images\/products\/thanksgiving_blend.jpg",
+                "desc": "C001 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            },
+            "C002": {
+                "code": "C002",
+                "name": "Holiday Blend",
+                "unit": "1lb",
+                "price": 14,
+                "image": "resources\/images\/products\/holiday_blend.jpg",
+                "desc": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            }
+        },
+        "cusInfo": {
+            "cusName": "duyet",
+            "tel": "12344567888",
+            "address": "abc",
+            "email": "duyet@sdsds.com"
+        }
+    },
+    "j6soaa6ons2jk39dtjrola7ob0": {
+        "items": {
+            "C003": {
+                "code": "C003",
+                "name": "Christmas Blend",
+                "unit": "1lb",
+                "price": 13.95,
+                "image": "resources\/images\/products\/christmas_blend.jpg",
+                "desc": "C003 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 3
+            },
+            "C004": {
+                "code": "C004",
+                "name": "Christmas Blend Espresso",
+                "unit": "1lb",
+                "price": 15.95,
+                "image": "resources\/images\/products\/christmas_espresso.jpg",
+                "desc": "C004 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 3
+            },
+            "C005": {
+                "code": "C005",
+                "name": "Gingerbread Latte Kit",
+                "unit": "1pk",
+                "price": 29.95,
+                "image": "resources\/images\/products\/gingerbreadlattekit.jpg",
+                "desc": "C005 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            }
+        },
+        "cusInfo": {
+            "cusName": "khang",
+            "tel": "12344567888",
+            "address": "sds",
+            "email": "khang@dds.con"
+        }
+    },
+    "qhv87cmqq95tgce1uosqm02nm6": {
+        "items": {
+            "C001": {
+                "code": "C001",
+                "name": "Thanksgiving Blend",
+                "unit": "1lb",
+                "price": 14.95,
+                "image": "resources\/images\/products\/thanksgiving_blend.jpg",
+                "desc": "C001 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 3
+            },
+            "C002": {
+                "code": "C002",
+                "name": "Holiday Blend",
+                "unit": "1lb",
+                "price": 14,
+                "image": "resources\/images\/products\/holiday_blend.jpg",
+                "desc": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            },
+            "C003": {
+                "code": "C003",
+                "name": "Christmas Blend",
+                "unit": "1lb",
+                "price": 13.95,
+                "image": "resources\/images\/products\/christmas_blend.jpg",
+                "desc": "C003 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            },
+            "C004": {
+                "code": "C004",
+                "name": "Christmas Blend Espresso",
+                "unit": "1lb",
+                "price": 15.95,
+                "image": "resources\/images\/products\/christmas_espresso.jpg",
+                "desc": "C004 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            }
+        },
+        "cusInfo": {
+            "cusName": "huy",
+            "tel": "1234567890",
+            "address": "sasa",
+            "email": "huy@ssd.con"
+        }
+    },
+    "tl02dnnqihap2r794uf0587744": {
+        "items": {
+            "C001": {
+                "code": "C001",
+                "name": "Thanksgiving Blend",
+                "unit": "1lb",
+                "price": 14.95,
+                "image": "resources\/images\/products\/thanksgiving_blend.jpg",
+                "desc": "C001 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 5
+            },
+            "C002": {
+                "code": "C002",
+                "name": "Holiday Blend",
+                "unit": "1lb",
+                "price": 14,
+                "image": "resources\/images\/products\/holiday_blend.jpg",
+                "desc": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            }
+        },
+        "cusInfo": {
+            "cusName": "vu",
+            "tel": "09876543211",
+            "address": "vn",
+            "email": "vu@fdf.com"
+        }
+    },
+    "9rpbgndqcfkq8odf500p3jvjb2": {
+        "items": {
+            "C001": {
+                "code": "C001",
+                "name": "Thanksgiving Blend",
+                "unit": "1lb",
+                "price": 14.95,
+                "image": "resources\/images\/products\/thanksgiving_blend.jpg",
+                "desc": "C001 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            },
+            "C002": {
+                "code": "C002",
+                "name": "Holiday Blend",
+                "unit": "1lb",
+                "price": 14,
+                "image": "resources\/images\/products\/holiday_blend.jpg",
+                "desc": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 1
+            }
+        },
+        "cusInfo": {
+            "cusName": "duyet vu",
+            "tel": "09876543211",
+            "address": "usa",
+            "email": "duyet@sds.com"
+        }
+    }
+}

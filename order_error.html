@@ -1,0 +1,39 @@
+
+<?php
+	session_start();
+?>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>        
+	<link rel="icon" href="resources/images/sites/favicon.png" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+	<script type="text/javascript" src="resources/jquery/jquery.js"></script>
+	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+	<title>Order Confirmation</title>	
+</head>
+<body>
+<div class="container-fluid">
+	<!--header-->
+	<?php include("header.html") ?>
+	<!--end of header-->
+	<!--contents-->
+	<?php if(isset($_SESSION['order_status'])){
+		$infoError = $_SESSION['order_fail'];		
+	?>
+	<div class="container col-md-7 col-md-offset-2">
+		<h1>OOPS! YOUR ORDER FAILED!</h1>
+		<div class='well'>
+			<h3>Errors may come from:</h3>
+			<p><?php echo $infoError; ?></p>
+		</div>
+	</div>
+	<!--end of contents-->	
+	<?php } else {
+		header("Location: page404.html");
+	} ?>
+</div>
+</body>
+</html>

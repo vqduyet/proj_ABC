@@ -1,0 +1,43 @@
+[
+	{
+	"code" : "C001",
+	"name" : "Thanksgiving Blend",
+	"unit" : "1lb",
+	"price" : 14.95,
+	"image" : "resources/images/products/thanksgiving_blend.jpg",
+	"description": "C001 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu."
+	},
+	{
+	"code" : "C002",
+	"name" : "Holiday Blend",
+	"unit" : "1lb",
+	"price" : 14.00,
+	"image" : "resources/images/products/holiday_blend.jpg",
+	"description": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu."
+	},
+	{
+	"code" : "C003",
+	"name" : "Christmas Blend",
+	"unit" : "1lb",
+	"price" : 13.95,
+	"image" : "resources/images/products/christmas_blend.jpg",
+	"description": "C003 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu."
+	},
+	{
+	"code" : "C004",
+	"name" : "Christmas Blend Espresso",
+	"unit" : "1lb",
+	"price" : 15.95,
+	"image" : "resources/images/products/christmas_espresso.jpg",
+	"description": "C004 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu."
+	},
+	{
+	"code" : "C005",
+	"name" : "Gingerbread Latte Kit",
+	"unit" : "1pk",
+	"price" : 29.95,
+	"image" : "resources/images/products/gingerbreadlattekit.jpg",
+	"description": "C005 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu."
+	}
+]
+

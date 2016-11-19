@@ -1,0 +1,109 @@
+<?php
+/*process data and save to file*/
+session_start();
+
+$orderStatus = false;
+$noPara = false;
+$errMsg = "";
+if(!empty($_POST["cusName"]) && !empty($_POST["cusTel"]) && !empty($_POST["cusAddr"]) && !empty($_POST["cusEmail"])){
+	//get post data
+	$cusName = $_POST["cusName"];
+	$cusTel = $_POST["cusTel"];
+	$cusAddr = $_POST["cusAddr"];
+	$cusEmail = $_POST["cusEmail"];
+	
+	unset($_POST["cusName"]);
+	unset($_POST["cusTel"]);
+	unset($_POST["cusAddr"]);
+	unset($_POST["cusEmail"]);
+	
+	//validation
+	$errorVal = false;
+	if(!preg_match('/^[a-zA-Z][a-zA-Z ]+$/',$cusName)){
+		$error = true;
+		$errMsg .= "\nName is not valid";
+	}
+	if(!preg_match("/^[0-9]{10,12}$/",$cusTel)){
+		$error = true;
+		$errMsg .= "\nTel no. is not valid";
+	}
+	if(!preg_match("/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/",$cusEmail)){
+		$error = true;
+		$errMsg .= "\nEmail is not valid";
+	}
+	//validated
+	if(!$errorVal){		
+		//save to file
+		try
+		{
+			//get SESSION['cart_item'] data
+			$items = $_SESSION["cart_item"];
+			$sessionID = session_id();
+			//get customer info
+			$cusInfo = array(
+			  'cusName'=> $cusName,
+			  'tel'=> $cusTel,
+			  'address'=>$cusAddr,
+			  'email'=> $cusEmail
+			);
+			//make an array includes 2 arrays above
+			$orderArray = array($sessionID => array('items' => $items, 'cusInfo' => $cusInfo));
+			
+			//check if file existing
+			$file_path = 'entity/order.json';			
+			$jsondata= '';			
+			if(file_exists($file_path)){
+				//Get data from existing json file
+				$jsondata = file_get_contents($file_path);
+				// decode json data
+				$json_arr = json_decode($jsondata, true);
+				//merge two arrays
+				$arr_data = array_merge($json_arr, $orderArray);																				
+				//Convert updated array to JSON
+				$jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);				
+			}
+			else {
+				$jsondata = json_encode($orderArray, JSON_PRETTY_PRINT);
+			}
+			
+			//write json data into order.json file
+			if(file_put_contents($file_path, $jsondata)) {				
+				//echo 'Data successfully saved';
+				//do sth here				
+				$_SESSION['order_success'] = $orderArray;
+				$orderStatus = true;				
+				//send email to customer for confirmation
+			}
+			else  {
+				//echo "error";
+				$errMsg .= "\nOrder submission failed.";
+			}			
+		}		   
+		catch (Exception $e) {
+			//echo 'Caught exception: ',  $e->getMessage(), "\n";
+			$errMsg .= '\nCaught exception: ' . $e->getMessage();
+		}		
+		//echo "ok";
+	}
+}
+else {
+	$errMsg .= "No info provided!";
+	$noPara = true;
+}
+
+//redirect to correct page
+if($orderStatus) {
+	$_SESSION['order_status'] = true;
+	header("Location: order_confirm.html");
+}
+else {
+	if($noPara) {
+		header("Location: page404.html");
+	}
+	else{
+		$_SESSION['order_status'] = false;
+		$_SESSION['order_fail'] = $errMsg;
+		header("Location: order_error.html");
+	}	
+}
+?>
