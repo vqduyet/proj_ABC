@@ -1,40 +1,49 @@
-<!DOCTYPE html>
-<html>
-    <head>        
-    </head>
-    <body>		
-        <!--menu-->
-        <nav id="nav_bar" class="navbar navbar-inverse">
-            <div class="container-fluid">                
-                <div class="navbar-header">
-                    <!--icon for collapsed menu items-->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!--logo -->
-                    <a href="index.html" class="navbar-brand"><img class="img-responsive img-circle" src="resources/images/sites/logo.png"  /></a>
-                </div>                
-                <!--menu items -->
-                <div class="collapse navbar-collapse" id="mainNavBar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html">Product List</a></li>
-						<li><a href="#">Contact</a></li>                       
-                    </ul>
+<?php
+session_start();
+?>
+<?php
+$session_items = 0;
+$total = 0;
+if(!empty($_SESSION["cart_item"])){
+	$session_items = count($_SESSION["cart_item"]);
+	foreach($_SESSION["cart_item"] as $k => $v) {
+		$total += $_SESSION['cart_item'][$k]["price"] * $_SESSION['cart_item'][$k]["quantity"];
+	}
+}
+?>		
 
-                    <!-- right align -->
-                    <ul class="nav navbar-nav navbar-right">						
-                        <li><a href="shopping_cart.html" title="Checkout"><img src="resources/images/sites/checkout24.png" alt="Checkout" /></a></li>
-						<li><a href="order_list.html" title="Order List"><img src="resources/images/sites/list24.png" alt="Order List" /></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!--end of menu-->
-		<!-- content goes here -->
+<!--menu-->
+<nav id="nav_bar" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">                
+		<div class="navbar-header">
+			<!--icon for collapsed menu items-->
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!--logo -->
+			<a href="index.html" class="navbar-brand"><img class="img-responsive img-circle" src="resources/images/sites/logo.png"  /></a>
+		</div>                
+		<!--menu items -->
+		<div class="collapse navbar-collapse" id="mainNavBar">
+			<ul class="nav navbar-nav">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="products.html">Product List</a></li>
+				<li><a href="contact.html">Contact</a></li>                       
+			</ul>
+
+			<!-- right align -->
+			<ul class="nav navbar-nav navbar-right">						
+				<li><a href="shopping_cart.html" title="Checkout">			
+						<sup class='cart-overview'><?php echo $session_items ?></sup>
+						<img src="resources/images/sites/checkout24.png" alt="Checkout" />
+						<sub class='cart-overview'><sup>$ </sup><?php echo number_format($total,2); ?></sub>		
+				</a></li>
+				<li><a href="order_list.html" title="Order List"><img src="resources/images/sites/list24.png" alt="Order List" /></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!--end of menu-->
 		
-		<!-- end of content -->
-    </body>
-</html>

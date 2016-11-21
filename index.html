@@ -1,47 +1,5 @@
 <?php 
 session_start();
-if(!empty($_GET["action"])){
-	switch($_GET["action"]){
-		case "add":
-			if(!empty($_POST["quantity"]) && !empty($_GET["code"])){
-				$itemCode = $_GET["code"];
-				$quantity = (int)$_POST["quantity"];
-				unset($_POST["quantity"]);
-				unset($_GET["code"]);
-				$json = file_get_contents("entity/products.json");
-				$products = json_decode($json,true);
-				$itemArray = null;
-				foreach($products as $key => $value){
-					if($products[$key]["code"] == $itemCode){
-						$itemArray = array($products[$key]["code"]=>array('code'=>$products[$key]["code"], 'name'=>$products[$key]["name"], 'unit'=>$products[$key]["unit"], 'price'=>$products[$key]["price"], 'image'=>$products[$key]["image"], 'desc'=>$products[$key]["description"], 'quantity'=>$quantity));
-					}
-				}				
-				if(!empty($_SESSION["cart_item"])) {
-					if(array_key_exists($itemArray[$itemCode]["code"],$_SESSION["cart_item"])) {
-						foreach($_SESSION["cart_item"] as $k => $v) {
-								if($itemArray[$itemCode]["code"] == $k){
-									$_SESSION["cart_item"][$k]["quantity"] = $quantity;
-									$message = "Product: " . $_SESSION["cart_item"][$k]["name"] . 
-												" -- changed quantity to: ". $_SESSION["cart_item"][$k]["quantity"];
-									echo "<script type='text/javascript'>alert('$message');</script>";
-								}								
-						}
-					} else {
-						$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
-						$message = "Added new product: " . $itemArray[$itemCode]["name"] . 
-												" -- quantity: ". $itemArray[$itemCode]["quantity"];
-						echo "<script type='text/javascript'>alert('$message');</script>";
-					}
-				} else {
-					$_SESSION["cart_item"] = $itemArray;
-					$message = "First product added: " . $itemArray[$itemCode]["name"] . 
-												" -- quantity: ". $itemArray[$itemCode]["quantity"];
-					echo "<script type='text/javascript'>alert('$message');</script>";
-				}				
-			}
-		break;
-	}
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,52 +12,8 @@ if(!empty($_GET["action"])){
 	<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
 	<script type="text/javascript" src="resources/jquery/jquery.js"></script>
 	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+	
 	<title>Home</title>	
-	<script>	
-		$.getJSON('entity/products.json', function(data) {
-		var output="<ul class='list-inline list-group'>";
-		for (var i in data) {
-			output += 	"<li class='list-group-item col-md-3'>" +						
-							"<img class='img-responsive img-rounded img-sm' src='" + data[i].image + "'/>" +
-							"<h4 class='col-md-offset-1'>" + data[i].name + "</h4>" +
-							
-							"<div class='container-fluid'>" +
-							"<button title='Details' class='btn btn-default btn-sm pull-right' data-toggle='modal' data-target='#myModel-" + data[i].code + "'><span class='glyphicon glyphicon-option-horizontal'></span></button>" +
-							"<p>Unit: " + data[i].unit + "<br/>" +
-							"Price: $" + data[i].price + "</p>" +							
-							"</div><hr/>" +
-							
-							"<div class='modal fade' id='myModel-" + data[i].code + "' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>" +
-								"<div class='modal-dialog modal-lg'>" +
-									"<div class='modal-content'>" +
-										"<div class='modal-header'>" +
-											"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-											"<span aria-hidden='true'>&times;</span>" +
-											"</button>" +
-											"<h3 class='modal-title'>" + data[i].name + "</h3>"+
-										"</div>" +
-										"<div class='modal-body'>" +
-											"<img class='img-responsive img-circle img-lg pull-right' src='" + data[i].image + "'/>" +
-											"<p>" + data[i].description + "</p>"+
-											"<hr/><p>Unit: " + data[i].unit + "<br/>" +
-											"Price: $" + data[i].price + "</p>" +
-										"</div>" +										
-									"</div>" +
-								"</div>" +
-							"</div>" +
-							
-							"<form method='post' action='?action=add&code=" + data[i].code + "'>" +
-							"<div class='container-fluid col-md-offset-1 col-sm-offset-3 col-xs-offset-1'>" + 
-							"<input style='width:30%;' class='input-sm' type='number' name='quantity' value='1' min='1'/> " +
-							"<button type='submit' class='btn btn-warning btnAddAction input-sm'><span class='glyphicon glyphicon-shopping-cart'></span> Add to cart</button>" + 
-							"</div>" +
-						"</form>" +
-						"</li>";
-		}
-		output+="</ul>";
-		document.getElementById("product_list").innerHTML=output;
-	});	
-    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -107,19 +21,9 @@ if(!empty($_GET["action"])){
 <?php include("header.html") ?>
 <!--end of header-->
 <!--contents-->
-<?php
-$session_items = 0;
-if(!empty($_SESSION["cart_item"])){
-	$session_items = count($_SESSION["cart_item"]);		
-?>
-	<div class="container-fluid row">
-		<div class="pull-right">
-			<p class="alert alert-success">Items in Ur Cart: <?php echo $session_items; ?></p>
-		</div>	
-	</div>
-<?php }	?>
-
-<div id="product_list" class="container">
+<div id='contents-container' class="container-fluid">
+	<br/>	
+	<img style="width:100%" class="img-responsive img-rounded" src="resources/images/sites/under-construction-page.jpg" alt="Page is under construction"/>	
 </div>
 <!--end of contents-->	
 </div>	

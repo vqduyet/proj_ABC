@@ -165,5 +165,61 @@
             "address": "usa",
             "email": "duyet@sds.com"
         }
+    },
+    "30c9odvl5lqjur33fnd48fjdk5": {
+        "items": {
+            "C004": {
+                "code": "C004",
+                "name": "Christmas Blend Espresso",
+                "unit": "1lb",
+                "price": 15.95,
+                "image": "resources\/images\/products\/christmas_espresso.jpg",
+                "desc": "C004 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 3
+            },
+            "C003": {
+                "code": "C003",
+                "name": "Christmas Blend",
+                "unit": "1lb",
+                "price": 13.95,
+                "image": "resources\/images\/products\/christmas_blend.jpg",
+                "desc": "C003 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 5
+            }
+        },
+        "cusInfo": {
+            "cusName": "duc quang",
+            "tel": "0123456789",
+            "address": "russia",
+            "email": "ducquang@dsds.co"
+        }
+    },
+    "gu1bmsr4f224gqd47c1kmq1mq6": {
+        "items": {
+            "C002": {
+                "code": "C002",
+                "name": "Holiday Blend",
+                "unit": "1lb",
+                "price": 14,
+                "image": "resources\/images\/products\/holiday_blend.jpg",
+                "desc": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 4
+            },
+            "C003": {
+                "code": "C003",
+                "name": "Christmas Blend",
+                "unit": "1lb",
+                "price": 13.95,
+                "image": "resources\/images\/products\/christmas_blend.jpg",
+                "desc": "C003 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 3
+            }
+        },
+        "cusInfo": {
+            "cusName": "reuyen",
+            "tel": "12344567888",
+            "address": "japan",
+            "email": "reuyen@ffsfd.jp"
+        }
     }
 }

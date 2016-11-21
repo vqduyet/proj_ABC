@@ -4,19 +4,29 @@
 	$jsondata = file_get_contents($file_path);
 	// decode json data
 	$orders = json_decode($jsondata, true);
-	$match = false;
+	$match = false;	
 	$res = null;
 	$searchStr = "";
 	if(!empty($_GET["action"])) {
 	switch($_GET["action"]) {
 		case "search":
-			$match = false;
+			$match = false;			
 			$searchStr = trim($_POST["orderNo"]);
+			unset($_POST["orderNo"]);
 			if(array_key_exists($searchStr,$orders)) {				
-				$res = $orders[$searchStr];
+				$res = array($searchStr => $orders[$searchStr]);
+				$match = true;				
+			}
+		break;
+		case "listAll":
+			$match = false;			
+			$adminStr = $_POST["adminKey"];
+			unset($_POST["adminKey"]);
+			if($adminStr == "abc123") {				
+				$res = $orders;				
 				$match = true;
 			}
-		break;		
+		break;
 	}
 }	
 ?>
@@ -38,36 +48,63 @@
 	<?php include("header.html") ?>
 	<!--end of header-->
 	<!--contents-->
-	<!--search area-->
-	<div class="table-responsive col-md-3" style="margin-right: 20px;">
-		<h3>SEARCH ORDER INFO</h3>
-		<hr/>
-		<form class="form" action="?action=search" method="post" id='searchForm'>
-			<div class="form-group">
-                    <label for="orderNo">Order Number</label>
-                    <input type="text"
-                           id="orderNo"
-                           name="orderNo"
-                           class="form-control"                                                      
-					/>                
-			</div>			
-			<input type="submit" value="Search" id="btnSearch" class="btn btn-default pull-right"/>
-		</form>
-	</div>
+	<div id='contents-container' class="container-fluid">
+	<h1>SEARCH ORDER DETAILS</h1>
+	<br/>
+	<div class="row">
+	<!--search area-->	
+	<div class='container col-md-3' style="margin-right: 20px; min-height: 100%;">
+		<div class="table-responsive col-md-12">
+			<h4 class='text-center'>SEARCH BY ORDER #</h4>
+			<hr/>
+			<form class="form" action="?action=search" method="post" id='searchForm'>
+				<div class="form-group">
+						<label for="orderNo">Order Number</label>
+						<input type="text"
+							   id="orderNo"
+							   name="orderNo"
+							   placeholder='Please enter your order number'
+							   class="form-control"                                                      
+						/>                
+				</div>			
+				<input type="submit" value="Search" id="btnSearch" class="btn btn-default pull-right"/>
+			</form>
+		</div>
+		<br/>
+		<div class="table-responsive col-md-12">
+			<h4 class='text-center'>LIST ALL ORDER</h4>
+			<hr/>
+			<form class="form" action="?action=listAll" method="post" id='listForm'>
+				<div class="form-group">
+						<label for="adminKey">Admin Key</label>
+						<input type="password"
+							   id="adminKey"
+							   name="adminKey"
+							   placeholder='Please enter admin key'
+							   class="form-control"                                                      
+						/>                
+				</div>			
+				<input type="submit" value="All Order" id="btnAllOrder" class="btn btn-default pull-right"/>
+			</form>
+		</div>
+	</div>	
 	<!--end of search area-->
+	
 	<!--result area-->
 	<?php if($match) { ?>
-	<div class="container table-responsive col-md-8">
-		<h2>Order No: <kbd><?php echo $searchStr; ?><kbd></h2>
+	<div class="col-md-8">	
+	<?php	foreach($res as $key=>$value) { ?>
+	<div class="container table-responsive col-md-12">
+		<h2>Order No: <kbd><?php echo $key; ?><kbd></h2>
 		<hr/>
 		<ul>
 			<li>
 				<h3>Customer Information</h3>
 				<ul>
-					<li>Customer Name: <?php echo $res['cusInfo']['cusName']; ?></li>
-					<li>Tel no.: <?php echo $res['cusInfo']['tel']; ?></li>
-					<li>Address: <?php echo $res['cusInfo']['address']; ?></li>
-					<li>Email: <?php echo $res['cusInfo']['email']; ?></li>					
+					<li>Customer Name: <?php echo $value['cusInfo']['cusName']; ?></li>
+					<li>Tel no.: <?php echo $value['cusInfo']['tel']; ?></li>
+					<li>Address: <?php echo $value['cusInfo']['address']; ?></li>
+					<li>Email: <?php echo $value['cusInfo']['email']; ?></li>					
 				</ul>
 			</li>
 			<li>
@@ -83,7 +120,7 @@
 					</thead>
 					<tbody>
 				<?php
-					foreach($res['items'] as $k => $v){
+					foreach($value['items'] as $k => $v){
 						echo '<tr>';
 						foreach($v as $k1 => $v1) {
 							if($k1 == 'code' || $k1 == 'image' || $k1 == 'desc') continue;
@@ -98,7 +135,11 @@
 		</ul>		
 	</div>
 	<?php } ?>
+	</div>
+	<?php } ?>
 	<!--end of result area-->
+	</div>
+	</div>
 	<!--end of contents-->	
 </div>
 </body>

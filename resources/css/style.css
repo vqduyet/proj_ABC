@@ -14,13 +14,14 @@ body {
   width: auto;
 }			
 .navbar li {
-	padding: 2px 5px;
+	padding: 0px 5px;
 }
 .navbar li:hover{				
 	background-color:#3c2209;				
 	border-radius: 10px;
 	font-size: 120%;				
 }
+
 
 /* product list */
 #product_list .img-sm {			
@@ -52,6 +53,8 @@ body {
 .table-responsive {
 	background-color: white;
 	border-radius: 10px;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
 }
 .table th, td {
 	text-align: center;			
@@ -61,4 +64,12 @@ body {
 }
 .btn-hide {
 	display:none;
+}
+/* cart overview on menu */
+.cart-overview {
+	color: #e0b864;
+}
+/* contents div */
+#contents-container {
+	margin-top: 50px;
 }

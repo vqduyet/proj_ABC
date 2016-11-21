@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
 	<script type="text/javascript" src="resources/jquery/jquery.js"></script>
 	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
-	<title>Order Confirmation</title>	
+	<title>Order Error</title>	
 </head>
 <body>
 <div class="container-fluid">
@@ -23,7 +23,7 @@
 	<?php if(isset($_SESSION['order_status'])){
 		$infoError = $_SESSION['order_fail'];		
 	?>
-	<div class="container col-md-7 col-md-offset-2">
+	<div id='contents-container' class="container col-md-7 col-md-offset-2">
 		<h1>OOPS! YOUR ORDER FAILED!</h1>
 		<div class='well'>
 			<h3>Errors may come from:</h3>
