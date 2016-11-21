@@ -221,5 +221,33 @@
             "address": "japan",
             "email": "reuyen@ffsfd.jp"
         }
+    },
+    "7sccs161krg07soge8cd3cau92": {
+        "items": {
+            "C001": {
+                "code": "C001",
+                "name": "Thanksgiving Blend",
+                "unit": "1lb",
+                "price": 14.95,
+                "image": "resources\/images\/products\/thanksgiving_blend.jpg",
+                "desc": "C001 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 2
+            },
+            "C002": {
+                "code": "C002",
+                "name": "Holiday Blend",
+                "unit": "1lb",
+                "price": 14,
+                "image": "resources\/images\/products\/holiday_blend.jpg",
+                "desc": "C002 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique ipsum in efficitur pharetra. Maecenas luctus ante in neque maximus, sed viverra sem posuere. Vestibulum lectus nisi, laoreet vel suscipit nec, feugiat at odio. Etiam eget tellus arcu.",
+                "quantity": 4
+            }
+        },
+        "cusInfo": {
+            "cusName": "thanh phuong",
+            "tel": "0123456789",
+            "address": "ap chien luoc",
+            "email": "thanhphuong@sdss.con"
+        }
     }
 }
